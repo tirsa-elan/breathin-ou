@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import 'jquery';
-declare var $: JQueryStatic;
-declare var jQuery: JQueryStatic;
+declare var $: any;
 
 @Component({
   selector: 'app-breathin',
@@ -11,28 +10,35 @@ declare var jQuery: JQueryStatic;
 export class BreathinComponent implements OnInit {
   ngOnInit(): void {
     this.dam();
-   
+
   }
+
   dam() {
-    $('#text').text('Breathe In!');
-    $('#circle').addClass('dam');
+    (document.getElementById("text") as HTMLElement).innerText = "Breathe In!";
+    let circle = (document.getElementById("circle") as HTMLElement)
+    circle.classList.remove("bazdam")
+    circle.classList.add("dam")
+
     setTimeout(() => {
       this.hold();
     }, 2000);
   }
 
   hold() {
-    $('#text').text('HOLD!');
-    $('#circle').addClass('hold');
+    (document.getElementById("text") as HTMLElement).innerText = "HOLD!";
+    let circle = (document.getElementById("circle") as HTMLElement)
+    circle.classList.remove("dam")
+    circle.classList.add("hold")
     setTimeout(() => {
       this.bazdam();
     }, 1000);
   }
 
   bazdam() {
-    $('#text').text('Breathe Out!');
-    $('#circle').addClass('bazdam');
-
+    (document.getElementById("text") as HTMLElement).innerText = "Breathe Out!";
+    let circle = (document.getElementById("circle") as HTMLElement)
+    circle.classList.remove("hold")
+    circle.classList.add("bazdam")
     setTimeout(() => {
       this.dam();
     }, 2000);
